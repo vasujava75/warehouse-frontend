@@ -1,0 +1,107 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "warehouse": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/warehouse",
+      "sourceRoot": "projects/warehouse/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/warehouse",
+            "index": "projects/warehouse/src/index.html",
+            "main": "projects/warehouse/src/main.ts",
+            "polyfills": "projects/warehouse/src/polyfills.ts",
+            "tsConfig": "projects/warehouse/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/warehouse/src/favicon.ico",
+              "projects/warehouse/src/assets"
+            ],
+            "styles": [
+              "projects/warehouse/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/warehouse/src/environments/environment.ts",
+                  "with": "projects/warehouse/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "warehouse:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "warehouse:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "warehouse:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/warehouse/src/test.ts",
+            "polyfills": "projects/warehouse/src/polyfills.ts",
+            "tsConfig": "projects/warehouse/tsconfig.spec.json",
+            "karmaConfig": "projects/warehouse/karma.conf.js",
+            "assets": [
+              "projects/warehouse/src/favicon.ico",
+              "projects/warehouse/src/assets"
+            ],
+            "styles": [
+              "projects/warehouse/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/warehouse/tsconfig.app.json",
+              "projects/warehouse/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "defaultProject": "warehouse"
+}
